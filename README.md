@@ -2,13 +2,13 @@
 
 ![como-api-funciona](https://user-images.githubusercontent.com/98189208/179321131-656d79ff-555d-4ca6-a9b5-5ee5f99ae474.jpg)
 
-## Índice
+## `Índice`
 
 * [Descrição do Projeto](#descrição-do-projeto)
 * [Funcionalidades e Demonstração da Aplicação](#funcionalidades-e-demonstração-da-aplicação)
 * [Acesso ao Projeto](#acesso-ao-projeto)
 
-## Descrição do projeto
+## `Descrição do projeto`
 <p>Projeto feito para a quinta avalição de java e spring boot. Nela é feita uma API em Java com Spring boot para cadastrar pedidos com itens e suas respectivas ofertas,<br>
 buscar o pedido, atualizar e deletar. Também é feita a parte de mensageria com RabbitMQ para enviar o id do pedido e o total a ser pago.</p><br>
 
@@ -67,18 +67,18 @@ Aqui fazemos a busca pelo total, ordenando de forma crescente ou decrescente.
 
 Aqui fazemos um patch do total de um pedido.
 
-- PATCH http://localhost:8080/api/pedido/{id}/{total}
+- `PATCH -` http://localhost:8080/api/pedido/{id}/{total}
 
 Aqui fazemos um patch do nome de um item.
 
-- PATCH http://localhost:8080/api/item/{id}/{nome}
+- `PATCH -` http://localhost:8080/api/item/{id}/{nome}
 
-### Exclusões:<br>
+### `Exclusões:`<br>
 
 Aqui deletamos um pedido.
 
-DELETE - http://localhost:8080/api/pedido/{id}
+`DELETE -` http://localhost:8080/api/pedido/{id}
 
-### Acesso ao Projeto
+### `Acesso ao Projeto`
 
 https://github.com/oswaldo-dev/Avaliacao-5

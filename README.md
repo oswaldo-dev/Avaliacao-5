@@ -12,7 +12,7 @@
 <p>Projeto feito para a quinta avalição de java e spring boot. Nela é feita uma API em Java com Spring boot para cadastrar pedidos com itens e suas respectivas ofertas,<br>
 buscar o pedido, atualizar e deletar. Também é feita a parte de mensageria com RabbitMQ para enviar o id do pedido e o total a ser pago.</p><br>
 
-## Funcionalidades e Demonstração da Aplicação
+## `Funcionalidades e Demonstração da Aplicação`
 
 ### `Cadastros:`<br>
 

@@ -3,7 +3,7 @@ package br.com.compass.mercado.controller;
 import br.com.compass.mercado.dto.request.RequestMessageDto;
 import br.com.compass.mercado.dto.request.RequestPedidoDto;
 import br.com.compass.mercado.dto.response.ResponsePedidoDto;
-import br.com.compass.mercado.service.AmqpService;
+import br.com.compass.mercado.interfaces.AmqpService;
 import br.com.compass.mercado.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

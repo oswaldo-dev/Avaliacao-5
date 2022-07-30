@@ -1,9 +1,9 @@
-package br.com.compass.pagamentos.service.implementation;
+package br.com.compass.pagamentos.service;
 
 import br.com.compass.pagamentos.dto.ResponseMenssageDto;
 import br.com.compass.pagamentos.model.Pagamento;
 import br.com.compass.pagamentos.repository.PagamentoRepository;
-import br.com.compass.pagamentos.service.ConsumerService;
+import br.com.compass.pagamentos.interfaces.ConsumerService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

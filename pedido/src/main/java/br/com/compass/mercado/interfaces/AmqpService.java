@@ -1,4 +1,4 @@
-package br.com.compass.mercado.service;
+package br.com.compass.mercado.interfaces;
 
 import br.com.compass.mercado.dto.request.RequestMessageDto;
 

@@ -1,4 +1,4 @@
-package br.com.compass.pagamentos.service;
+package br.com.compass.pagamentos.interfaces;
 
 import br.com.compass.pagamentos.dto.ResponseMenssageDto;
 

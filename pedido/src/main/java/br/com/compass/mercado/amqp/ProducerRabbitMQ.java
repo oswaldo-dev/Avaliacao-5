@@ -1,6 +1,6 @@
-package br.com.compass.mercado.amqp.implementation;
+package br.com.compass.mercado.amqp;
 
-import br.com.compass.mercado.amqp.AmqpProducer;
+import br.com.compass.mercado.interfaces.AmqpProducer;
 import br.com.compass.mercado.dto.request.RequestMessageDto;
 import org.springframework.amqp.AmqpRejectAndDontRequeueException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

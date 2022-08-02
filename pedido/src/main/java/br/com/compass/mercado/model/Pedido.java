@@ -1,5 +1,8 @@
 package br.com.compass.mercado.model;
 
+import br.com.compass.mercado.enums.Status;
+import br.com.compass.mercado.enums.StatusPagamento;
+import br.com.compass.mercado.enums.TipoPagamento;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,8 +17,17 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String cpf;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pedido_id")
     private List<Item> itens;
+    @Enumerated(value = EnumType.STRING)
+    private Status status = Status.EM_ANDAMENTO;
+    @Enumerated(value = EnumType.STRING)
+    private StatusPagamento statusPagamento = StatusPagamento.PROCESSANDO;
+    @Enumerated(value = EnumType.STRING)
+    private TipoPagamento tipoPagamento;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Cartao> cartoes;
     private BigDecimal total;
 
 }

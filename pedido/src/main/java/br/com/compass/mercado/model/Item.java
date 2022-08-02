@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Data
+@Table(name = "pedido_itens")
 public class Item {
 
     @Id
@@ -19,7 +20,8 @@ public class Item {
     private LocalDateTime dataDeValidade;
     private BigDecimal valor;
     private String descricao;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "itens_id")
     private List<Oferta> ofertas;
 
 }

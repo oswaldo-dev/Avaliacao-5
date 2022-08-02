@@ -3,6 +3,7 @@ package br.com.compass.mercado.service;
 import br.com.compass.mercado.dto.request.RequestItemDto;
 import br.com.compass.mercado.dto.request.RequestPedidoDto;
 import br.com.compass.mercado.dto.response.ResponsePedidoDto;
+import br.com.compass.mercado.enums.Status;
 import br.com.compass.mercado.exceptions.PedidoNotFoundException;
 import br.com.compass.mercado.exceptions.ValorDeDescontoInvalidoException;
 import br.com.compass.mercado.model.Pedido;

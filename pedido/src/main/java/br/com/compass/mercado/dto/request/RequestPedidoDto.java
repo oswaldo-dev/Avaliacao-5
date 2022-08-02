@@ -1,11 +1,16 @@
 package br.com.compass.mercado.dto.request;
 
+import br.com.compass.mercado.enums.Status;
+import br.com.compass.mercado.enums.TipoPagamento;
+import br.com.compass.mercado.model.Cartao;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
@@ -24,6 +29,8 @@ public class RequestPedidoDto {
     private String cpf;
     @Size(min = 1)
     private List<@Valid RequestItemDto> itens;
+    private TipoPagamento tipoPagamento;
+    private List<RequestCartaoDto> cartoes;
     @Positive
     private BigDecimal total;
 

@@ -22,7 +22,7 @@ public class PagamentoService implements ConsumerService {
         repository.save(pagamento);
 
         System.out.println("==========PEDIDO==========\n" +
-                "id : " + message.getId_pedido() +
+                "id : " + message.getIdPedido() +
                 "\ntotal :" + message.getTotal() +
                 "\n---------------------------\n");
     }

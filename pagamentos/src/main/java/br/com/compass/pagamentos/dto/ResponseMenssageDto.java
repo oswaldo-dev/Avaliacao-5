@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class ResponseMenssageDto {
 
-    private long id_pedido;
+    private long idPedido;
     private List<ResponseCartaoDto> cartaos;
     private BigDecimal total;
 

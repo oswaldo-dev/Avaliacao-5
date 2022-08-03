@@ -47,7 +47,7 @@ public class PedidoController {
         URI uri = componentsBuilder.path("/api/pedido/{id}").buildAndExpand(pedidoDto.getId()).toUri();
 
         RequestMessageDto messageDto = new RequestMessageDto();
-        messageDto.setId_pedido(pedidoDto.getId());
+        messageDto.setIdPedido(pedidoDto.getId());
         messageDto.setTotal(pedidoDto.getTotal());
         messageDto.setCartaos(pedidoDto.getCartoes());
 

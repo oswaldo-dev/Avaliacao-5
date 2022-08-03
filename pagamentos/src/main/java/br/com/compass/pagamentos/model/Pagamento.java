@@ -16,7 +16,7 @@ public class Pagamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long id_pedido;
+    private long idPedido;
     private LocalDateTime dataCricacao = LocalDateTime.now();
     private BigDecimal total;
 

@@ -22,6 +22,8 @@ public class HandlerException extends ResponseEntityExceptionHandler {
     private static final String OFERTA_FORA_DA_VALIDADE = "Oferta fora da validade";
     private static final String TOTAL_SO_ACEITA_VALORES_MAIORES_DO_QUE_ZERO = "total so aceita valores maiores do que zero";
     private static final String O_NOME_NAO_PODE_ESTAR_VAZIO = "O nome não pode estar vazio.";
+    private static final String ESSE_PEDIDO_NÃO_PODE_SER_DELETADO_POR_ESTAR_COM_STATUS_DE_PAGAMENTO_APROVADO_REJEITADO =
+            "Esse pedido não pode ser deletado por estar com status de pagamento aprovado/rejeitado";
 
     @ExceptionHandler(value = PedidoNotFoundException.class)
     protected ResponseEntity<MensagemErro> handlerPartidoNotFound(PedidoNotFoundException exception) {
@@ -46,6 +48,12 @@ public class HandlerException extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = ValorDeDescontoInvalidoException.class)
     protected ResponseEntity<MensagemErro> handlerAssociadoNotFound(ValorDeDescontoInvalidoException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MensagemErro(TOTAL_SO_ACEITA_VALORES_MAIORES_DO_QUE_ZERO));
+    }
+
+    @ExceptionHandler(value = PedidoIndelibleException.class)
+    protected ResponseEntity<MensagemErro> handlerAssociadoNotFound(PedidoIndelibleException exception) {
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(new MensagemErro(
+                ESSE_PEDIDO_NÃO_PODE_SER_DELETADO_POR_ESTAR_COM_STATUS_DE_PAGAMENTO_APROVADO_REJEITADO));
     }
 
     @ExceptionHandler(value = NomeVazioException.class)

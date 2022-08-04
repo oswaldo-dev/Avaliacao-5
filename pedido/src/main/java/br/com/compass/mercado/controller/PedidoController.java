@@ -46,11 +46,12 @@ public class PedidoController {
         ResponsePedidoDto pedidoDto = service.post(pedido);
         URI uri = componentsBuilder.path("/api/pedido/{id}").buildAndExpand(pedidoDto.getId()).toUri();
 
-        RequestMessageDto messageDto = new RequestMessageDto();
-        messageDto.setIdPedido(pedidoDto.getId());
-        messageDto.setCpf(pedidoDto.getCpf());
-        messageDto.setTotal(pedidoDto.getTotal());
-        messageDto.setCartao(pedidoDto.getCartao());
+        RequestMessageDto messageDto = RequestMessageDto.builder()
+                .idPedido(pedidoDto.getId())
+                .cpf(pedidoDto.getCpf())
+                .total(pedidoDto.getTotal())
+                .cartao(pedidoDto.getCartao())
+                .build();
 
         amqpService.sendToConsumer(messageDto);
         return ResponseEntity.created(uri).body(pedidoDto);

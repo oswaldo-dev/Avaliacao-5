@@ -15,6 +15,7 @@ import br.com.compass.pagamentos.repository.PagamentoRepository;
 import br.com.compass.pagamentos.interfaces.ConsumerService;
 import br.com.compass.pagamentos.util.Converter;
 import br.com.compass.pagamentos.util.Criptografar;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.time.LocalTime;
 
 @Service
+@Slf4j
 public class PagamentoService implements ConsumerService, AmqpService {
 
     @Autowired
@@ -47,7 +49,7 @@ public class PagamentoService implements ConsumerService, AmqpService {
         Pagamento pagamento = modelMapper.map(message, Pagamento.class);
         repository.save(pagamento);
 
-        System.out.println("==========PEDIDO==========\n" +
+        log.info("==========PEDIDO==========\n" +
                 "id : " + message.getIdPedido() +
                 "\ntotal :" + message.getTotal() +
                 "\n---------------------------\n");

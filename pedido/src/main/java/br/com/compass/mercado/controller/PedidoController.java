@@ -48,8 +48,9 @@ public class PedidoController {
 
         RequestMessageDto messageDto = new RequestMessageDto();
         messageDto.setIdPedido(pedidoDto.getId());
+        messageDto.setCpf(pedidoDto.getCpf());
         messageDto.setTotal(pedidoDto.getTotal());
-        messageDto.setCartaos(pedidoDto.getCartoes());
+        messageDto.setCartao(pedidoDto.getCartao());
 
         amqpService.sendToConsumer(messageDto);
         return ResponseEntity.created(uri).body(pedidoDto);

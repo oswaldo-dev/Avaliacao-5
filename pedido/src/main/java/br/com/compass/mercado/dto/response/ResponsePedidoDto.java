@@ -15,6 +15,6 @@ public class ResponsePedidoDto {
     private Status status;
     private StatusPagamento statusPagamento;
     private TipoPagamento tipoPagamento;
-    private List<ResponseCartaoDto> cartoes;
+    private ResponseCartaoDto cartao;
     private BigDecimal total;
 }

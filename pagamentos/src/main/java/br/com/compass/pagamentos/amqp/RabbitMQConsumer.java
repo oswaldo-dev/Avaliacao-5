@@ -1,7 +1,7 @@
 package br.com.compass.pagamentos.amqp;
 
 import br.com.compass.pagamentos.interfaces.AmqpConsumer;
-import br.com.compass.pagamentos.dto.ResponseMenssageDto;
+import br.com.compass.pagamentos.dto.response.ResponseMenssageDto;
 import br.com.compass.pagamentos.interfaces.ConsumerService;
 import org.springframework.amqp.AmqpRejectAndDontRequeueException;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

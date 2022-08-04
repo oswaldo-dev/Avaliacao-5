@@ -26,8 +26,8 @@ public class Pedido {
     private StatusPagamento statusPagamento = StatusPagamento.PROCESSANDO;
     @Enumerated(value = EnumType.STRING)
     private TipoPagamento tipoPagamento;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Cartao> cartoes;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Cartao cartao;
     private BigDecimal total;
 
 }

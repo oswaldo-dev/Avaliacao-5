@@ -31,7 +31,7 @@ public class RequestPedidoDto {
     @Size(min = 1)
     private List<@Valid RequestItemDto> itens;
     private TipoPagamento tipoPagamento;
-    private List<RequestCartaoDto> cartoes;
+    private RequestCartaoDto cartao;
     @Positive
     @NotNull
     private BigDecimal total;

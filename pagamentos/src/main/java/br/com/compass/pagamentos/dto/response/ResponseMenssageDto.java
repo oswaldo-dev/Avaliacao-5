@@ -1,4 +1,4 @@
-package br.com.compass.pagamentos.dto;
+package br.com.compass.pagamentos.dto.response;
 
 import br.com.compass.mercado.dto.response.ResponseCartaoDto;
 import lombok.Data;
@@ -10,7 +10,8 @@ import java.util.List;
 public class ResponseMenssageDto {
 
     private long idPedido;
-    private List<ResponseCartaoDto> cartaos;
+    private String cpf;
+    private ResponseCartaoDto cartao;
     private BigDecimal total;
 
 }

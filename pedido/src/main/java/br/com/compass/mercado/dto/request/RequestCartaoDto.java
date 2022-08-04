@@ -17,7 +17,7 @@ public class RequestCartaoDto {
     private String nomeCartao;
     @Positive
     @NotNull
-    private int codigoSeguranca;
+    private String codigoSeguranca;
     private Marca marca;
     @Positive
     @Max(value = 12)

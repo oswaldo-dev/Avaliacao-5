@@ -16,7 +16,7 @@ public class Cartao {
     private String numeroCartao;
     private String nomeCartao;
     @Column(length = 3)
-    private int codigoSeguranca;
+    private String codigoSeguranca;
     @Enumerated(value = EnumType.STRING)
     private Marca marca;
     private int mesExpiracao;

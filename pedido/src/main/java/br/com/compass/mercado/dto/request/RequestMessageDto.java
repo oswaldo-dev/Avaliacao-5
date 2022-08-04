@@ -9,6 +9,7 @@ import java.util.List;
 @Data
 public class RequestMessageDto {
     private long idPedido;
-    private List<ResponseCartaoDto> cartaos;
+    private String cpf;
+    private ResponseCartaoDto cartao;
     private BigDecimal total;
 }

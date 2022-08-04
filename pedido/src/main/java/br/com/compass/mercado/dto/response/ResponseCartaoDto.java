@@ -8,7 +8,7 @@ public class ResponseCartaoDto {
     private long id;
     private String numeroCartao;
     private String nomeCartao;
-    private int codigoSeguranca;
+    private String codigoSeguranca;
     private Marca marca;
     private int mesExpiracao;
     private int anoExpiracao;

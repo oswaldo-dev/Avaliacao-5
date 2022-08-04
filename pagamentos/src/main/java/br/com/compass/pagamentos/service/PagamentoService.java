@@ -1,5 +1,8 @@
 package br.com.compass.pagamentos.service;
 
+import br.com.compass.pagamentos.dto.request.RequestMessageDto;
+import br.com.compass.pagamentos.interfaces.AmqpProducer;
+import br.com.compass.pagamentos.interfaces.AmqpService;
 import br.com.compass.pagamentos.dto.request.RequestAuthDto;
 import br.com.compass.pagamentos.dto.request.RequestBancoDto;
 import br.com.compass.pagamentos.dto.request.RequestCardDto;
@@ -20,7 +23,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.time.LocalTime;
 
 @Service
-public class PagamentoService implements ConsumerService {
+public class PagamentoService implements ConsumerService, AmqpService {
 
     @Autowired
     public PagamentoRepository repository;
@@ -32,6 +35,10 @@ public class PagamentoService implements ConsumerService {
     private Criptografar criptografar;
     @Autowired
     private Converter converter;
+    @Autowired
+    private AmqpProducer<RequestMessageDto> amqp;
+    @Autowired
+    private AmqpService amqpService;
     private String accessToken;
     private LocalTime localTime;
 
@@ -45,8 +52,15 @@ public class PagamentoService implements ConsumerService {
                 "\ntotal :" + message.getTotal() +
                 "\n---------------------------\n");
 
+        ResponseBancoDto responseBancoDto = enviaPagamentoBanco(message);
 
-        System.out.println(enviaPagamentoBanco(message).getStatus());
+        RequestMessageDto messageDto = RequestMessageDto.builder()
+                .pedidoId(message.getIdPedido())
+                .status(responseBancoDto.getStatus())
+                .build();
+
+        amqpService.sendToConsumer(messageDto);
+
     }
 
     private ResponseAuthDto autenticador() {
@@ -109,5 +123,10 @@ public class PagamentoService implements ConsumerService {
                 .retrieve()
                 .bodyToMono(ResponseBancoDto.class)
                 .block();
+    }
+
+    @Override
+    public void sendToConsumer(RequestMessageDto messageDto) {
+        amqp.producer(messageDto);
     }
 }

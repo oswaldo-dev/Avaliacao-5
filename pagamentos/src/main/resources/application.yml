@@ -1,4 +1,6 @@
 spring:
+  main:
+    allow-circular-references: true
   datasource:
     url: jdbc:mysql://localhost:3306/mercado?useTimezone=true&serverTimezone=America/Sao_Paulo
     username: root

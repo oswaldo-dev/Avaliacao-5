@@ -1,7 +1,7 @@
 package br.com.compass.mercado.amqp;
 
-import br.com.compass.mercado.interfaces.AmqpProducer;
 import br.com.compass.mercado.dto.request.RequestMessageDto;
+import br.com.compass.mercado.interfaces.AmqpProducer;
 import org.springframework.amqp.AmqpRejectAndDontRequeueException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

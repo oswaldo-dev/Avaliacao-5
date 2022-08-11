@@ -5,7 +5,6 @@ import br.com.compass.mercado.dto.request.RequestOfertaDto;
 import br.com.compass.mercado.dto.request.RequestPedidoDto;
 import br.com.compass.mercado.model.Pedido;
 import br.com.compass.mercado.repository.PedidoRepository;
-import br.com.compass.mercado.util.ValidaData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,6 +17,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,8 +32,6 @@ class PedidoServiceTest {
     private PedidoRepository repository;
     @Mock
     private ModelMapper modelMapper;
-    @Mock
-    private ValidaData data;
     private Pedido pedido;
     private RequestPedidoDto pedidoDto;
     private List<RequestItemDto> itens;
@@ -48,14 +46,14 @@ class PedidoServiceTest {
 
         ofertas.add(RequestOfertaDto.builder()
                 .nome("CPSS10")
-                .dataDeCriacao("10/10/2010 10:10:10")
-                .dataDeValidade("10/10/2025 10:10:10")
+                .dataCriacao(LocalDateTime.parse("10/10/2015 10:10:10"))
+                .dataValidade(LocalDateTime.parse("11/11/2025 10:10:10"))
                 .desconto(new BigDecimal("10.0"))
                 .descricao("10 reais de desconto").build());
         itens.add(RequestItemDto.builder()
                 .nome("Video-Game")
-                .dataDeCriacao("10/10/2010 10:10:10")
-                .dataDeValidade("10/10/2025 10:10:10")
+                .dataCriacao(LocalDateTime.parse("10/10/2015 10:10:10"))
+                .dataValidade(LocalDateTime.parse("11/11/2025 10:10:10"))
                 .valor(new BigDecimal("10.0"))
                 .descricao("PlayStation").ofertas(ofertas).build());
 

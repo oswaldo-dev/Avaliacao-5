@@ -27,6 +27,6 @@ public class RequestCartaoDto {
     @NotNull
     private int anoExpiracao;
     @NotBlank
-    private String moeda;
+    private String moeda = "BRL";
 
 }

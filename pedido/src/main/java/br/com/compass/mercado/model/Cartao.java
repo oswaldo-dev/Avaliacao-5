@@ -2,7 +2,6 @@ package br.com.compass.mercado.model;
 
 import br.com.compass.mercado.enums.Marca;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 

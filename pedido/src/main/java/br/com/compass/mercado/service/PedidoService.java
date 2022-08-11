@@ -1,6 +1,5 @@
 package br.com.compass.mercado.service;
 
-import br.com.compass.mercado.dto.request.RequestItemDto;
 import br.com.compass.mercado.dto.request.RequestPedidoDto;
 import br.com.compass.mercado.dto.response.ResponseMenssageDto;
 import br.com.compass.mercado.dto.response.ResponsePedidoDto;
@@ -12,7 +11,6 @@ import br.com.compass.mercado.exceptions.ValorDeDescontoInvalidoException;
 import br.com.compass.mercado.interfaces.ConsumerService;
 import br.com.compass.mercado.model.Pedido;
 import br.com.compass.mercado.repository.PedidoRepository;
-import br.com.compass.mercado.util.ValidaData;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,9 +28,6 @@ public class PedidoService implements ConsumerService {
     @Autowired
     private ModelMapper modelMapper;
 
-    @Autowired
-    private ValidaData data;
-
     public Page<ResponsePedidoDto> getAll(String cpf, Pageable sort) {
         if (cpf == null) {
             Page<Pedido> all = repository.findAll(sort);
@@ -48,13 +43,8 @@ public class PedidoService implements ConsumerService {
     }
 
     public ResponsePedidoDto post(RequestPedidoDto pedido) {
-        validaData(pedido);
-        BigDecimal total = pedido.getItens().stream().map(RequestItemDto::getValor).reduce(BigDecimal.ZERO,BigDecimal::add);
-        Pedido pedidoEntity = modelMapper.map(pedido, Pedido.class);
 
-        if (pedido.getTotal() != total) {
-            pedidoEntity.setTotal(total);
-        }
+        Pedido pedidoEntity = modelMapper.map(pedido, Pedido.class);
 
         Pedido pedidoSalvo = repository.save(pedidoEntity);
         return modelMapper.map(pedidoSalvo, ResponsePedidoDto.class);
@@ -79,15 +69,6 @@ public class PedidoService implements ConsumerService {
         }
 
         repository.delete(pedidoEntity);
-    }
-
-    private void validaData(RequestPedidoDto pedido) {
-        RequestItemDto itemAtual = pedido.getItens().get(pedido.getItens().size() - 1);
-        String dataDeCriacaoOferta = itemAtual.getOfertas().get(itemAtual.getOfertas().size() - 1).getDataDeCriacao();
-        String dataDeValidadeOferta = itemAtual.getOfertas().get(itemAtual.getOfertas().size() - 1).getDataDeValidade();
-
-        data.verificaData(dataDeCriacaoOferta, dataDeValidadeOferta);
-        data.verificaValidade(dataDeValidadeOferta);
     }
 
     @Override

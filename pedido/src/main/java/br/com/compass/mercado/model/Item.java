@@ -16,8 +16,8 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
-    private LocalDateTime dataDeCriacao;
-    private LocalDateTime dataDeValidade;
+    private LocalDateTime dataCriacao;
+    private LocalDateTime dataValidade;
     private BigDecimal valor;
     private String descricao;
     @OneToMany(cascade = CascadeType.ALL)

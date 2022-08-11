@@ -16,6 +16,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,8 +43,8 @@ class ItemServiceTest {
 
         ofertas.add(RequestOfertaDto.builder()
                 .nome("CPSS10")
-                .dataDeCriacao("10/10/2010 10:10:10")
-                .dataDeValidade("10/10/2025 10:10:10")
+                .dataCriacao(LocalDateTime.parse("10/10/2015 10:10:10"))
+                .dataValidade(LocalDateTime.parse("11/11/2025 10:10:10"))
                 .desconto(new BigDecimal("10.0"))
                 .descricao("10 reais de desconto").build());
 
@@ -53,8 +54,8 @@ class ItemServiceTest {
                 .ofertas(ofertas)
                 .valor(new BigDecimal(100))
                 .descricao("Honda Civic")
-                .dataDeValidade("11/11/2025 10:10:10")
-                .dataDeCriacao("10/10/2015 10:10:10").build();
+                .dataValidade(LocalDateTime.parse("11/11/2025 10:10:10"))
+                .dataCriacao(LocalDateTime.parse("10/10/2015 10:10:10")).build();
     }
 
 

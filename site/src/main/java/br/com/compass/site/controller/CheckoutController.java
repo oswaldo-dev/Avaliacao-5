@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 
 @RestController
 @RequestMapping("/api/checkout")
@@ -22,8 +23,11 @@ public class CheckoutController {
     private CheckoutService service;
 
     @PostMapping
-    public ResponseEntity<ResponseCheckoutDto> post(@RequestBody @Valid RequestCheckoutDto checkout, UriComponentsBuilder componentsBuilder) {
+    public ResponseEntity<ResponseCheckoutDto> post(@RequestBody @Valid RequestCheckoutDto checkout,
+                                                    UriComponentsBuilder componentsBuilder) {
         ResponseCheckoutDto checkoutDto = service.post(checkout);
-        return ResponseEntity.ok(checkoutDto);
+        URI uri = URI.create("http://localhost:8080/api/pedido/" + checkoutDto.getNumeroDoPedido());
+
+        return ResponseEntity.created(uri).body(checkoutDto);
     }
 }

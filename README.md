@@ -9,86 +9,114 @@
 * [Acesso ao Projeto](#acesso-ao-projeto)
 
 ## `Descrição do projeto`
-<p>Projeto feito para a quinta avalição de java e spring boot. Nela é feita uma API em Java com Spring boot para cadastrar pedidos com itens e suas respectivas ofertas,<br>
-buscar o pedido, atualizar e deletar. Também é feita a parte de mensageria com RabbitMQ para enviar o id do pedido, o total, o cpf e o cartao. Essa mensagem é enviada para uma api externa que efetuará o pagamento e devolvera se foi efetivado ou não. Após a o pagamento ser efetivado ou recusado, a api envia uma outra mensagem para a api de pedido que atualiza no banco de dados o seu status e o status do pagamento.</p><br>
+<p>Projeto feito para a quinta avalição de java e spring boot. Nela é feita uma API em Java com Spring boot para cadastrar itens, clientes, vincular clientes a cartões e realizar um pedido.<br> 
+Também é feita a parte de mensageria com RabbitMQ para enviar o id do pedido, o total, o cpf e o cartao. Essa mensagem é enviada para uma api externa que efetuará o pagamento e devolvera se foi efetivado ou não. Após a o pagamento ser efetivado ou recusado, a api envia uma outra mensagem para a api de pedido que atualiza no banco de dados o seu status e o status do pagamento.</p><br>
 
 ## `Funcionalidades e Demonstração da Aplicação`
 
 ### `Cadastros:`<br>
 
-Aqui é feito o cadastro dos pedidos, itens e ofertas onde temos os campos.
+Aqui é feito o cadastro do cliente onde temos os campos.
 
-- `POST -` http://localhost:8080/api/pedido<br>
+- `POST -` http://localhost:8082/api/clente <br>
 
 ```
 {
     "cpf" : "Campo do tipo String",
-    "itens" : [
-        {
-            "nome" : "Campo do tipo String",
-            "dataDeCriacao" : "Campo do tipo String (porém é convertido para LocalDateTime, com o formato dd/mm/yyyy hh:mm:ss)",
-            "dataDeValidade" : "Campo do tipo String (porém é convertido para LocalDateTime, com o formato dd/mm/yyyy hh:mm:ss)",
-            "valor" : "Campo do tipo BigDecimal",
-            "descricao" : "Campo do tipo String",
-            "ofertas" : [
-                {
-                    "nome" : "Campo do tipo String",
-                    "dataDeCriacao" : "Campo do tipo String (porém é convertido para LocalDateTime, com o formato dd/mm/yyyy hh:mm:ss)",
-                    "dataDeValidade" :"Campo do tipo String (porém é convertido para LocalDateTime, com o formato dd/mm/yyyy hh:mm:ss)",
-                    "desconto" : "Campo do tipo BigDecimal",
-                    "descricao" : "Campo do tipo String"
-                }
-            ]
-        }
-    ],
-    "tipoPagamento" : "String so aceitando (só aceita CREDIT_CARD, PIX e BANK_PAYMENT_SLIP)",
-    "cartao" : {
-            "numeroCartao" : "Campo do tipo String",
-            "nomeCartao" : "Campo do tipo String",
-            "codigoSeguranca" : "Campo do tipo String aceitando 3 caracters",
-                "marca" : "String so aceitando (só aceita MASTERCARD e VISA)",
-                "mesExpiracao" : "Campo do tipo Integer com maximo = 12",
-                "anoExpiracao" : "Campo do tipo Integer",
-                "moeda" : "Campo do tipo String"    
-    },
-    "total" : "Campo do tipo BigDecimal"
+    "nome" : "Campo do tipo String",
+    "dataCriacao" : "Campo do tipo LocalDateTime"
 }
 ```
 
+- `POST -` http://localhost:8082/api/item <br>
+
+Aqui é feito o cadastro do item onde temos os campos.
+
+```
+{
+    "nome" : "Campo do tipo String",
+    "dataValidade" : "Campo do tipo LocalDateTime",
+    "dataCriacao" : "Campo do tipo LocalDateTime",
+    "valor" : "Campo do tipo BigDecimal",
+    "descricao" : "Campo do tipo String",
+    "estoque" : "Campo do tipo Integer"
+}
+```
+
+- `POST -` http://localhost:8082/api/cliente/{cpf}/cartoes <br>
+
+Aqui é feito o cadastro dos cartões de um cliente onde temos os campos.
+
+```
+{
+    "numeroCartao" : "Campo do tipo String",
+    "nomeCartao" : "Campo do tipo String",
+    "codigoSeguranca" : "Campo do tipo String",
+    "mesExpiracao" : "Campo do tipo Integer",
+    "anoExpiracao" : "Campo do tipo Integer",
+    "marca" : "Campo do tipo String (só aceita MASTERCARD e VISA)"
+}
+```
+
+- `POST -` http://localhost:8082/api/checkout <br>
+
+Aqui é feito o pedido de itens para determinado cliente onde temos os campos.
+
+```
+{
+    "itens" : [
+        {
+            "skuId" : "Campo do tipo String gerado altomaticamente na hora
+            de cadastrar um item, ele é informado na hora q cadastramos
+            um item ou quando damos um get no item",
+            "quantidade" : "Campo do tipo Integer"
+        }
+    ],
+    "cliente" : {
+        "clienteId" : "Campo do tipo String",
+        "cartaoId" : "Campo do tipo long"
+    }
+}
+```
 ### `Buscas:`<br>
 
-Aqui fazemos a busca de todos os pedidos já cadastrados.
+Aqui fazemos a busca de todos os clientes já cadastrados.
 
-- `GET -` http://localhost:8080/api/pedido<br>
+- `GET -` http://localhost:8082/api/cliente <br>
 
-Aqui fazemos a busca de pedidos por ID.
+Aqui fazemos a busca de clientes por ID.
 
-- `GET -` http://localhost:8080/api/pedido/{id}
+- `GET -` http://localhost:8082/api/cliente/{cpf}
 
-Aqui fazemos a busca por cpf.
+Aqui fazemos a busca de todos os itens já cadastrados.
 
-- `GET -` http://localhost:8080/api/pedido?cpf={cpf}
+- `GET -` http://localhost:8082/api/item
 
-Aqui fazemos a busca pelo total, ordenando de forma crescente ou decrescente.
+Aqui fazemos a busca de itens por ID.
 
-- `GET -` http://localhost:8080/api/pedido?sort=total,{asc/desc}
+- `GET -` http://localhost:8082/api/item/{id}
 
+Aqui fazemos a busca de todos os cartões cadastrados de um cliente.
+
+- `GET -` http://localhost:8082/api/cliente/{cpf}/cartoes
+
+Aqui fazemos a busca de cartões de um cliente por ID.
+
+- `GET -` http://localhost:8082/api/cliente/{cpf}/cartoes/{id}
 
 ### `Atualizações:`<br>
 
-Aqui fazemos um patch do total de um pedido.
+Aqui fazemos um put de um cliente.
 
-- `PATCH -` http://localhost:8080/api/pedido/{id}/{total}
+- `PUT -` http://localhost:8082/api/cliente/{cpf}
 
-Aqui fazemos um patch do nome de um item.
+Aqui fazemos um put de um item.
 
-- `PATCH -` http://localhost:8080/api/item/{id}/{nome}
+- `PUT -` http://localhost:8082/api/item/{id}
 
-### `Exclusões:`<br>
+Aqui fazemos um put de um cartão de um cliente.
 
-Aqui deletamos um pedido.
-
-`DELETE -` http://localhost:8080/api/pedido/{id}
+- `PUT -` http://localhost:8082/api/cliente/{cpf}/cartoes/{id}
 
 ### `Acesso ao Projeto`
 

@@ -10,7 +10,7 @@
 
 ## `Descrição do projeto`
 <p>Projeto feito para a quinta avalição de java e spring boot. Nela é feita uma API em Java com Spring boot para cadastrar pedidos com itens e suas respectivas ofertas,<br>
-buscar o pedido, atualizar e deletar. Também é feita a parte de mensageria com RabbitMQ para enviar o id do pedido e o total a ser pago.</p><br>
+buscar o pedido, atualizar e deletar. Também é feita a parte de mensageria com RabbitMQ para enviar o id do pedido, o total, o cpf e o cartao. Essa mensagem é enviada para uma api externa que efetuará o pagamento e devolvera se foi efetivado ou não. Após a o pagamento ser efetivado ou recusado, a api envia uma outra mensagem para a api de pedido que atualiza no banco de dados o seu status e o status do pagamento.</p><br>
 
 ## `Funcionalidades e Demonstração da Aplicação`
 
@@ -40,7 +40,18 @@ Aqui é feito o cadastro dos pedidos, itens e ofertas onde temos os campos.
                 }
             ]
         }
-    ]
+    ],
+    "tipoPagamento" : "String so aceitando (só aceita CREDIT_CARD, PIX e BANK_PAYMENT_SLIP)",
+    "cartao" : {
+            "numeroCartao" : "Campo do tipo String",
+            "nomeCartao" : "Campo do tipo String",
+            "codigoSeguranca" : "Campo do tipo String aceitando 3 caracters",
+                "marca" : "String so aceitando (só aceita MASTERCARD e VISA)",
+                "mesExpiracao" : "Campo do tipo Integer com maximo = 12",
+                "anoExpiracao" : "Campo do tipo Integer",
+                "moeda" : "Campo do tipo String"    
+    },
+    "total" : "Campo do tipo BigDecimal"
 }
 ```
 
